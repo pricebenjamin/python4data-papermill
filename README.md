@@ -40,10 +40,8 @@ For the examples shown in this walk-through, we're going to install `papermill`,
 
 ```bash
 conda activate papermill
-pip install tornado==5.1.1 papermill jupyterlab  # See note below
-pip install scipy scikit-learn matplotlib
-pip install tensorflow tensorflow-datasets
-pip install gplearn
+pip install tornado==5.1.1 papermill nteract-scrapbook jupyterlab  # See note below
+pip install tensorflow tensorflow-datasets matplotlib
 ```
 
 Unfortunately, as of writing (4 March 2019), `pip install papermill` will pull in the latest version of `jupyter` and the latest version of `tornado`. However, `tornado==6.0.1` (released 3 March 2019) is not compatible with `jupyter` at this time. Instead, we must pin `tornado` to version `5.1.1`. (Check the [tornado releases page](https://www.tornadoweb.org/en/stable/releases.html) and [this GitHub issue](https://github.com/jupyter/notebook/issues/4399) to see if this problem has been resolved by now.)
@@ -161,3 +159,59 @@ for i in 1 2 3; do
     done;
 done;
 ```
+
+## Can we only parametrize numbers, strings, lists, dicts?
+
+## Example use cases
+1. Hyperparameter search for MNIST-trained CNN
+    1. Possible parameters:
+        1. network depth
+        1. loss function
+        1. convolution parameters
+            1. kernel size
+            1. kernel initializer
+            1. kernel regularizer
+            1. padding
+            1. activation
+            1. data format (may affect training wall-time)
+            1. use bias / bias initializer
+        1. use augmentation
+        1. use batch norm
+        1. use dropout
+        1. dropout probability
+        1. layer order (conv -> BN -> activation)
+        1. flatten -> dense vs GAP -> dense
+    1. Visualization:
+        1. network diagram
+        1. weights (histograms / normalized, single channel imshow)
+        1. image at each layer
+        1. metrics over time
+        1. cross-validation results (mean and variance)
+        1. failure analysis
+
+1. Company / Sector stock market analysis
+    1. Parameters:
+        1. company name / ticker symbol / sector label
+        1. time interval
+    1. Visualization:
+        1. stock price
+        1. trading volume
+        1. headlines (web-scraped)
+            1. reported earnings
+            1. price split
+            1. dividends
+            1. acquisitions
+        1. sentiment analysis
+        1. performance against previous year(s)
+        1. performance against companies in same sector
+
+1. Genetic Programming (specifically with `gplearn`)
+    1. Parameters:
+        1. target function (pickled!)
+        1. function set
+        1. many hyperparameters, e.g. mutation probabilities
+    1. Visualization:
+        1. fitness vs population size (fixed # generations)
+        1. fitness over time (fixed pop. size)
+        1. average program size over time (fixed pop. size)
+        1. wall-time-per-generation over time

@@ -40,7 +40,10 @@ For the examples shown in this walk-through, we're going to install `papermill`,
 
 ```bash
 conda activate papermill
-pip install tornado==5.1.1 papermill jupyterlab gplearn scikit-learn  # See note below
+pip install tornado==5.1.1 papermill jupyterlab  # See note below
+pip install scipy scikit-learn matplotlib
+pip install tensorflow tensorflow-datasets
+pip install gplearn
 ```
 
 Unfortunately, as of writing (4 March 2019), `pip install papermill` will pull in the latest version of `jupyter` and the latest version of `tornado`. However, `tornado==6.0.1` (released 3 March 2019) is not compatible with `jupyter` at this time. Instead, we must pin `tornado` to version `5.1.1`. (Check the [tornado releases page](https://www.tornadoweb.org/en/stable/releases.html) and [this GitHub issue](https://github.com/jupyter/notebook/issues/4399) to see if this problem has been resolved by now.)
@@ -142,8 +145,6 @@ for i in [1, 2, 3]:
             parameters = dict(int1=i, int2=j)
         )
 ```
-
-_TODO:_ Incorporate GridSearch or RandomizedSearch to generate parameter combinations. (Alternatively, create a Python iterator over all combinations; see `itertools` module.)
 
 ### Command-line interface:
 
